@@ -1,11 +1,28 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../providers/AuthProvider';
 
 const Navber = () => {
+    const {user,logOut,admin}=useContext(AuthContext);
+
+    const handelSignOut=()=>{
+        logOut()
+        .then(()=>{
+            console.log('Log out successfully');
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    }
+
     const links = <>
                         <li><NavLink to={'/'}>Home</NavLink></li>
-                        <li><NavLink to={'/register'}>Register</NavLink></li>
+                        {
+                            user && <><li><NavLink to={'/dashboard'}>Dashboard</NavLink></li></>
+                        }
+                        <li><NavLink to={'/contact'}>Contact</NavLink></li>
                         <li><NavLink to={'/login'}>LogIn</NavLink></li>
+                        <li><NavLink to={'/register'}>Register</NavLink></li>
                  </>
     return (
         <div >
@@ -19,7 +36,7 @@ const Navber = () => {
                         {links}
                     </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">daisyUI</a>
+                    <a className="btn btn-ghost text-xl">Fast-Food</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -27,7 +44,14 @@ const Navber = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                {
+                        user ? <>
+                        <span className="mr-4">{user.email}</span>
+                        <button onClick={handelSignOut} className="btn btn-outline bg-emerald-950 hover:bg-white text-white">Sign out</button>
+                        {/* <a onClick={handelSignOut} className="btn">sign out</a> */}
+                        </> 
+                        : <Link to="/login"><button className="btn btn-outline bg-emerald-950 hover:bg-white text-white ">LOG IN</button></Link>
+                    }
                 </div>
             </div>
         </div>
