@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
+import { sendEmailVerification } from 'firebase/auth';
+import auth from '../firebase/firebase.config';
 
 
 
@@ -18,7 +20,11 @@ const Register = () => {
         .then((result)=>{
             const user= result.user;
             // console.log(user);
-            navigate('/')
+            sendEmailVerification(auth.currentUser)
+            .then(() => {
+                 alert('Please, verify your email');
+            });
+            navigate('/login')
         })
         .catch((error)=>{
             console.log(error);

@@ -21,8 +21,13 @@ const Navber = () => {
                             user && <><li><NavLink to={'/dashboard'}>Dashboard</NavLink></li></>
                         }
                         <li><NavLink to={'/contact'}>Contact</NavLink></li>
-                        <li><NavLink to={'/login'}>LogIn</NavLink></li>
-                        <li><NavLink to={'/register'}>Register</NavLink></li>
+                        
+                        {
+                            !user && <>
+                            <li><NavLink to={'/login'}>LogIn</NavLink></li>
+                            <li><NavLink to={'/register'}>Register</NavLink></li>
+                            </>
+                        }
                  </>
     return (
         <div >

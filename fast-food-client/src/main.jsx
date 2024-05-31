@@ -14,6 +14,8 @@ import ErrorPage from './components/ErrorPage.jsx';
 import Private from './private/Private.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import Contact from './components/Contact.jsx';
+import AdminLogIn from './adminComponents/AdminLogIn.jsx';
+import AdminDashboard from './adminComponents/AdminDashboard.jsx';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +45,14 @@ const router = createBrowserRouter([
       },
     ]
   },
+  {
+    path:"/adminlogin",
+    element:<AdminLogIn></AdminLogIn>
+  },
+  {
+    path:'/adminDashboard',
+    element:<AdminDashboard></AdminDashboard>
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
