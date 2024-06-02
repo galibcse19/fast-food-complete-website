@@ -16,6 +16,7 @@ import Dashboard from './components/Dashboard.jsx';
 import Contact from './components/Contact.jsx';
 import AdminLogIn from './adminComponents/AdminLogIn.jsx';
 import AdminDashboard from './adminComponents/AdminDashboard.jsx';
+import Order from './components/Order.jsx';
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,8 @@ const router = createBrowserRouter([
     children:[
       {
         path:"/",
-        element:<Home></Home>
+        element:<Home></Home>,
+        loader:()=>fetch('http://localhost:5000/foodData'),
       },
       {
         path:"/register",
@@ -41,8 +43,14 @@ const router = createBrowserRouter([
       },
       {
         path:'/dashboard',
-        element:<Private><Dashboard></Dashboard></Private>
+        element:<Private><Dashboard></Dashboard></Private>,
+        loader:()=>fetch('http://localhost:5000/foodData'),
       },
+      {
+        path:'/foodData/:id',
+        element:<Private><Order></Order></Private>,
+        loader: ({params})=> fetch(`http://localhost:5000/foodData/${params.id}`)
+      }
     ]
   },
   {

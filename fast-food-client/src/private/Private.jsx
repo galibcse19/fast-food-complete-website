@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
+import { Navigate } from 'react-router-dom';
 
  
  const Private = ({children}) => {
@@ -11,6 +12,7 @@ import { AuthContext } from '../providers/AuthProvider';
         return children;
     }
     return  <Navigate to="/login"></Navigate>;
+    // return isAuthenticated ? children : <Navigate to="/login" />;
  };
 
 export default Private;

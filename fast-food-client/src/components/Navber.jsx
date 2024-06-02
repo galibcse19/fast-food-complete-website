@@ -3,12 +3,13 @@ import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 
 const Navber = () => {
-    const {user,logOut,admin}=useContext(AuthContext);
+    const {user,logOut}=useContext(AuthContext);
 
     const handelSignOut=()=>{
         logOut()
         .then(()=>{
             console.log('Log out successfully');
+             
         })
         .catch((error)=>{
             console.log(error);
